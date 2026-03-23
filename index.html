@@ -1,858 +1,968 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Paschoalotto - Serviços Financeiros</title>
-	
-	<!-- Font Awesome para ícones -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	
-	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-	
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			font-family: 'Inter', sans-serif;
-		}
-		
-		body {
-			background-color: #f5f7fa;
-			color: #333;
-			line-height: 1.6;
-		}
-		
-		.container {
-			max-width: 1200px;
-			margin: 0 auto;
-			padding: 0 20px;
-		}
-		
-		/* Header */
-		header {
-			background: linear-gradient(135deg, #0051FA 0%, #003bb5 100%);
-			color: white;
-			padding: 15px 0;
-			box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-		}
-		
-		.header-content {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			flex-wrap: wrap;
-			gap: 20px;
-		}
-		
-		.logo-area {
-			display: flex;
-			align-items: center;
-		}
-		
-		.logo-real {
-			max-height: 60px;
-			width: auto;
-			filter: brightness(0) invert(1);
-		}
-		
-		.company-info {
-			display: flex;
-			gap: 20px;
-			flex-wrap: wrap;
-		}
-		
-		.info-item {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			background: rgba(255,255,255,0.1);
-			padding: 8px 15px;
-			border-radius: 50px;
-			backdrop-filter: blur(5px);
-		}
-		
-		.info-item i {
-			font-size: 16px;
-			opacity: 0.9;
-		}
-		
-		.info-item span {
-			font-size: 14px;
-			font-weight: 500;
-		}
-		
-		/* Hero Section */
-		.hero {
-			background-image: url('https://www.paschoalotto.com.br/wp-content/themes/paschoalotto/img/institucional/home/banner-home-1.webp');
-			background-size: cover;
-			background-position: center;
-			color: white;
-			padding: 120px 0;
-			text-align: center;
-			position: relative;
-		}
-		
-		.hero::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background: rgba(0, 0, 0, 0.5);
-			z-index: 1;
-		}
-		
-		.hero .container {
-			position: relative;
-			z-index: 2;
-		}
-		
-		.hero h2 {
-			font-size: 48px;
-			font-weight: 800;
-			margin-bottom: 20px;
-			text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-		}
-		
-		.hero p {
-			font-size: 20px;
-			max-width: 700px;
-			margin: 0 auto 30px;
-			opacity: 0.95;
-			text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-		}
-		
-		.btn-atendimento {
-			display: inline-block;
-			padding: 15px 50px;
-			background-color: transparent;
-			color: #0051FA;
-			text-decoration: none;
-			border-radius: 50px;
-			font-weight: 700;
-			font-size: 20px;
-			transition: all 0.3s ease;
-			border: 2px solid #0051FA;
-			cursor: pointer;
-			background-color: white;
-			box-shadow: 0 4px 15px rgba(0, 81, 250, 0.2);
-		}
-		
-		.btn-atendimento:hover {
-			background-color: #0051FA;
-			color: white;
-			transform: translateY(-2px);
-			box-shadow: 0 6px 20px rgba(0, 81, 250, 0.3);
-		}
-		
-		/* Seção Serviços */
-		.services {
-			padding: 80px 0;
-			background-color: white;
-		}
-		
-		.section-title {
-			text-align: center;
-			margin-bottom: 60px;
-		}
-		
-		.section-title h2 {
-			font-size: 36px;
-			color: #0051FA;
-			font-weight: 700;
-			margin-bottom: 15px;
-		}
-		
-		.section-title p {
-			font-size: 18px;
-			color: #666;
-			max-width: 600px;
-			margin: 0 auto;
-		}
-		
-		.services-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 30px;
-		}
-		
-		.service-card {
-			background: #f8faff;
-			padding: 40px 30px;
-			border-radius: 20px;
-			text-align: center;
-			transition: all 0.3s ease;
-			border: 1px solid #eef2f6;
-		}
-		
-		.service-card:hover {
-			transform: translateY(-10px);
-			box-shadow: 0 20px 40px rgba(0, 81, 250, 0.1);
-			border-color: #0051FA;
-		}
-		
-		.service-icon {
-			width: 80px;
-			height: 80px;
-			background: linear-gradient(135deg, #0051FA 0%, #003bb5 100%);
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin: 0 auto 25px;
-			color: white;
-			font-size: 32px;
-		}
-		
-		.service-card h3 {
-			font-size: 22px;
-			color: #333;
-			margin-bottom: 15px;
-			font-weight: 700;
-		}
-		
-		.service-card p {
-			color: #666;
-			font-size: 15px;
-			line-height: 1.6;
-		}
-		
-		.service-link {
-			display: inline-block;
-			margin-top: 20px;
-			color: #0051FA;
-			text-decoration: none;
-			font-weight: 600;
-			font-size: 14px;
-			transition: color 0.3s ease;
-		}
-		
-		.service-link:hover {
-			color: #003bb5;
-		}
-		
-		.service-link i {
-			margin-left: 5px;
-			font-size: 12px;
-		}
-		
-		/* Seção Depoimentos */
-		.testimonials {
-			padding: 80px 0;
-			background: linear-gradient(135deg, #f0f4ff 0%, #e6ecfe 100%);
-		}
-		
-		.testimonials-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 30px;
-			margin-top: 40px;
-		}
-		
-		.testimonial-card {
-			background: white;
-			padding: 35px;
-			border-radius: 20px;
-			box-shadow: 0 10px 30px rgba(0, 81, 250, 0.1);
-			transition: all 0.3s ease;
-			position: relative;
-		}
-		
-		.testimonial-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 20px 40px rgba(0, 81, 250, 0.15);
-		}
-		
-		.testimonial-card i.fa-quote-left {
-			color: #0051FA;
-			font-size: 24px;
-			opacity: 0.3;
-			position: absolute;
-			top: 20px;
-			left: 20px;
-		}
-		
-		.testimonial-card i.fa-quote-right {
-			color: #0051FA;
-			font-size: 24px;
-			opacity: 0.3;
-			position: absolute;
-			bottom: 20px;
-			right: 20px;
-		}
-		
-		.testimonial-text {
-			font-size: 16px;
-			color: #555;
-			line-height: 1.8;
-			margin-bottom: 25px;
-			padding: 0 15px;
-			position: relative;
-			z-index: 1;
-		}
-		
-		.testimonial-author {
-			display: flex;
-			align-items: center;
-			gap: 15px;
-			border-top: 1px solid #eef2f6;
-			padding-top: 20px;
-		}
-		
-		.author-avatar {
-			width: 50px;
-			height: 50px;
-			background: linear-gradient(135deg, #0051FA 0%, #003bb5 100%);
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: white;
-			font-size: 20px;
-			font-weight: 600;
-		}
-		
-		.author-info h4 {
-			font-size: 18px;
-			color: #333;
-			margin-bottom: 5px;
-			font-weight: 600;
-		}
-		
-		.author-info p {
-			font-size: 14px;
-			color: #666;
-		}
-		
-		/* Seção História */
-		.history {
-			padding: 80px 0;
-			background: linear-gradient(135deg, #f5f7fa 0%, #eef2f6 100%);
-		}
-		
-		.history-content {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 50px;
-			align-items: center;
-		}
-		
-		.history-text h2 {
-			font-size: 36px;
-			color: #0051FA;
-			font-weight: 700;
-			margin-bottom: 25px;
-		}
-		
-		.history-text p {
-			font-size: 16px;
-			color: #555;
-			margin-bottom: 20px;
-			line-height: 1.8;
-		}
-		
-		.history-stats {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 20px;
-			margin-top: 40px;
-		}
-		
-		.stat-item {
-			text-align: center;
-		}
-		
-		.stat-number {
-			font-size: 36px;
-			font-weight: 800;
-			color: #0051FA;
-			margin-bottom: 5px;
-		}
-		
-		.stat-label {
-			font-size: 14px;
-			color: #666;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-		}
-		
-		.history-image {
-			background: linear-gradient(135deg, #0051FA 0%, #003bb5 100%);
-			border-radius: 30px;
-			padding: 40px;
-			color: white;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-		}
-		
-		.history-image h3 {
-			font-size: 28px;
-			margin-bottom: 20px;
-			font-weight: 700;
-		}
-		
-		.history-image p {
-			font-size: 16px;
-			opacity: 0.9;
-			margin-bottom: 20px;
-			line-height: 1.8;
-		}
-		
-		.history-image i {
-			font-size: 48px;
-			opacity: 0.5;
-			margin-top: 20px;
-		}
-		
-		/* Contato e Informações */
-		.contact-info {
-			padding: 60px 0;
-			background-color: white;
-		}
-		
-		.info-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 40px;
-		}
-		
-		.info-block {
-			padding: 30px;
-			background: #f8faff;
-			border-radius: 20px;
-			border: 1px solid #eef2f6;
-		}
-		
-		.info-block h3 {
-			font-size: 22px;
-			color: #0051FA;
-			margin-bottom: 20px;
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-		
-		.info-block h3 i {
-			font-size: 24px;
-		}
-		
-		.info-detail {
-			margin-bottom: 15px;
-			padding-bottom: 15px;
-			border-bottom: 1px solid #eef2f6;
-		}
-		
-		.info-detail:last-child {
-			border-bottom: none;
-			padding-bottom: 0;
-		}
-		
-		.info-detail strong {
-			display: block;
-			color: #333;
-			margin-bottom: 5px;
-			font-size: 16px;
-		}
-		
-		.info-detail span {
-			color: #666;
-			font-size: 15px;
-			line-height: 1.6;
-		}
-		
-		.info-detail a {
-			color: #0051FA;
-			text-decoration: none;
-			font-weight: 500;
-			transition: color 0.3s ease;
-		}
-		
-		.info-detail a:hover {
-			color: #003bb5;
-			text-decoration: underline;
-		}
-		
-		/* Footer */
-		footer {
-			background: #1a1a2e;
-			color: white;
-			padding: 40px 0 20px;
-		}
-		
-		.footer-content {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			flex-wrap: wrap;
-			gap: 30px;
-			margin-bottom: 30px;
-		}
-		
-		.footer-logo {
-			display: flex;
-			align-items: center;
-		}
-		
-		.footer-logo img {
-			max-height: 50px;
-			width: auto;
-			filter: brightness(0) invert(1);
-		}
-		
-		.social-links {
-			display: flex;
-			gap: 20px;
-		}
-		
-		.social-links a {
-			color: white;
-			font-size: 24px;
-			transition: color 0.3s ease;
-		}
-		
-		.social-links a:hover {
-			color: #0051FA;
-		}
-		
-		.copyright {
-			text-align: center;
-			padding-top: 30px;
-			border-top: 1px solid rgba(255,255,255,0.1);
-			font-size: 14px;
-			color: #888;
-		}
-		
-		/* Botão Flutuante WhatsApp */
-		.whatsapp-float {
-			position: fixed;
-			bottom: 40px;
-			right: 40px;
-			background-color: #5BC928;
-			color: white;
-			width: 70px;
-			height: 70px;
-			border-radius: 50%;
-			text-align: center;
-			font-size: 35px;
-			box-shadow: 0 10px 25px rgba(91, 201, 40, 0.4);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			text-decoration: none;
-			transition: all 0.3s ease;
-			z-index: 1000;
-		}
-		
-		.whatsapp-float:hover {
-			background-color: #4aa820;
-			transform: scale(1.1);
-			box-shadow: 0 15px 35px rgba(91, 201, 40, 0.5);
-		}
-		
-		/* Responsividade */
-		@media (max-width: 768px) {
-			.header-content {
-				flex-direction: column;
-				text-align: center;
-			}
-			
-			.hero h2 {
-				font-size: 32px;
-			}
-			
-			.hero p {
-				font-size: 18px;
-			}
-			
-			.history-content {
-				grid-template-columns: 1fr;
-			}
-			
-			.testimonials-grid {
-				grid-template-columns: 1fr;
-			}
-			
-			.whatsapp-float {
-				width: 60px;
-				height: 60px;
-				font-size: 30px;
-				bottom: 20px;
-				right: 20px;
-			}
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal Digital - Boletos, antecipação de mensalidades e negociação de débitos via WhatsApp. Atendimento rápido, seguro e humanizado 24/7.">
+    <meta name="keywords" content="hapvida, notredame, boleto digital, antecipação, negociação débitos, whatsapp, atendimento saúde">
+    <meta name="author" content="">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#FF6B1A">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://seu-site.com/">
+    <meta property="og:title" content="Portal Digital Hapvida | Atendimento WhatsApp">
+    <meta property="og:description" content="Boletos, antecipação e negociação via WhatsApp. Rápido e seguro.">
+    <meta property="og:image" content="images/hero-enfermeira.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portal | Atendimento Digital">
+    <meta name="twitter:description" content="Serviços financeiros rápidos via WhatsApp.">
+    <meta name="twitter:image" content="images/hero-enfermeira.jpg">
+
+    <link rel="canonical" href="https://seu-site.com/">
+
+    <title>Portal Digital | Boletos, Antecipação e Negociação via WhatsApp</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#FF6B1A',
+              secondary: '#0066CC',
+              'brand-orange': '#FF6B1A',
+              'brand-blue': '#0066CC',
+              'whatsapp-green': '#25D366',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Animations */
+      @keyframes fadeSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse-soft {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.08);
+        }
+      }
+
+      .animate-fade-up {
+        animation: fadeSlideUp 0.8s ease-out forwards;
+      }
+      
+      .animate-pulse-soft {
+        animation: pulse-soft 2.5s infinite ease-in-out;
+      }
+
+      /* Gradient Text */
+      .text-gradient {
+        background: linear-gradient(135deg, #FF6B1A 0%, #0066CC 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* WhatsApp icon green */
+      .whatsapp-icon {
+        color: #25D366 !important;
+      }
+    </style>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Hapvida NotreDame",
+      "url": "https://seu-site.com",
+      "logo": "images/logo-hapvida.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-11-92144-7407",
+        "contactType": "Customer Service",
+        "availableLanguage": ["Portuguese"]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Avenida Paulista, 867",
+        "addressLocality": "São Paulo",
+        "addressRegion": "SP",
+        "postalCode": "01311-100",
+        "addressCountry": "BR"
+      }
+    }
+    </script>
 </head>
-<body>
-	<!-- Header -->
-	<header>
-		<div class="container">
-			<div class="header-content">
-				<div class="logo-area">
-					<img src="https://www.paschoalotto.com.br/wp-content/themes/paschoalotto/img/institucional/logo/logo-np.webp" alt="Paschoalotto" class="logo-real" onerror="this.src='https://via.placeholder.com/150x50/0051FA/ffffff?text=Paschoalotto'">
-				</div>
-				
-				<div class="company-info">
-					<div class="info-item">
-						<i class="fas fa-building"></i>
-						<span>CNPJ: 08.939.258/0001-79</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	
-	<!-- Hero Section -->
-	<section class="hero">
-		<div class="container">
-			<h2>Facilite sua vida com a Paschoalotto</h2>
-			<p>Soluções financeiras completas para você regularizar suas pendências e conquistar a tranquilidade que merece.</p>
-			<a href="https://api.whatsapp.com/send/?phone=5511961626754&text=Olá!%20Preciso%20de%20informações%20sobre%20os%20serviços%20da%20Paschoalotto." class="btn-atendimento" target="_blank">
-				ATENDIMENTO
-			</a>
-		</div>
-	</section>
-	
-	<!-- Serviços -->
-	<section class="services">
-		<div class="container">
-			<div class="section-title">
-				<h2>Nossos Serviços</h2>
-				<p>Soluções digitais e humanizadas para todas as suas necessidades financeiras</p>
-			</div>
-			
-			<div class="services-grid">
-				<div class="service-card">
-					<div class="service-icon">
-						<i class="fas fa-barcode"></i>
-					</div>
-					<h3>2ª Via de Boleto</h3>
-					<p>Emita a segunda via do seu boleto de forma rápida e fácil, sem complicação.</p>
-					<a href="https://api.whatsapp.com/send/?phone=5511961626754&text=Olá!%20Preciso%20solicitar%202%C2%AA%20via%20de%20boleto." class="service-link" target="_blank">Solicitar agora <i class="fas fa-arrow-right"></i></a>
-				</div>
-				
-				<div class="service-card">
-					<div class="service-icon">
-						<i class="fas fa-handshake"></i>
-					</div>
-					<h3>Renegociação</h3>
-					<p>Negocie suas dívidas com condições especiais e parcelas que cabem no seu bolso.</p>
-					<a href="https://api.whatsapp.com/send/?phone=5511961626754&text=Olá!%20Quero%20renegociar%20minhas%20dívidas." class="service-link" target="_blank">Negociar agora <i class="fas fa-arrow-right"></i></a>
-				</div>
-				
-				<div class="service-card">
-					<div class="service-icon">
-						<i class="fas fa-check-circle"></i>
-					</div>
-					<h3>Quitação de Contrato</h3>
-					<p>Quite seu contrato de forma antecipada e livre-se das pendências de uma vez.</p>
-					<a href="https://api.whatsapp.com/send/?phone=5511961626754&text=Olá!%20Quero%20quitar%20meu%20contrato%20antecipadamente." class="service-link" target="_blank">Quitar agora <i class="fas fa-arrow-right"></i></a>
-				</div>
-				
-				<div class="service-card">
-					<div class="service-icon">
-						<i class="fas fa-calendar-check"></i>
-					</div>
-					<h3>Antecipação de Parcela</h3>
-					<p>Antecipe parcelas e ganhe descontos especiais em suas negociações.</p>
-					<a href="https://api.whatsapp.com/send/?phone=5511961626754&text=Olá!%20Quero%20antecipar%20minhas%20parcelas." class="service-link" target="_blank">Antecipar agora <i class="fas fa-arrow-right"></i></a>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<!-- Depoimentos -->
-	<section class="testimonials">
-		<div class="container">
-			<div class="section-title">
-				<h2>O que nossos clientes dizem</h2>
-				<p>Histórias reais de pessoas que transformaram sua vida financeira com a Paschoalotto</p>
-			</div>
-			
-			<div class="testimonials-grid">
-				<div class="testimonial-card">
-					<i class="fas fa-quote-left"></i>
-					<p class="testimonial-text">"Consegui renegociar minhas dívidas de forma simples e rápida. O atendimento foi excelente e as condições caberam no meu bolso. Recomendo a todos!"</p>
-					<div class="testimonial-author">
-						<div class="author-avatar">MA</div>
-						<div class="author-info">
-							<h4>Maria Aparecida</h4>
-							<p>Cliente desde 2023</p>
-						</div>
-					</div>
-					<i class="fas fa-quote-right"></i>
-				</div>
-				
-				<div class="testimonial-card">
-					<i class="fas fa-quote-left"></i>
-					<p class="testimonial-text">"A Paschoalotto me ajudou a quitar meu contrato de forma antecipada com desconto. Processo transparente e sem burocracia. Equipe muito atenciosa!"</p>
-					<div class="testimonial-author">
-						<div class="author-avatar">JC</div>
-						<div class="author-info">
-							<h4>João Carlos</h4>
-							<p>Cliente desde 2022</p>
-						</div>
-					</div>
-					<i class="fas fa-quote-right"></i>
-				</div>
-				
-				<div class="testimonial-card">
-					<i class="fas fa-quote-left"></i>
-					<p class="testimonial-text">"Facilidade na emissão da segunda via do boleto e suporte rápido pelo WhatsApp. Resolvi tudo sem sair de casa. Empresa séria e comprometida."</p>
-					<div class="testimonial-author">
-						<div class="author-avatar">AS</div>
-						<div class="author-info">
-							<h4>Ana Silva</h4>
-							<p>Cliente desde 2024</p>
-						</div>
-					</div>
-					<i class="fas fa-quote-right"></i>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<!-- História -->
-	<section class="history">
-		<div class="container">
-			<div class="history-content">
-				<div class="history-text">
-					<h2>Nossa História</h2>
-					<p>A Paschoalotto é uma empresa de outsourcing em serviços financeiros e atendimento que há mais de duas décadas transforma experiência em resultados. Fundada em Bauru, interior de São Paulo, a empresa cresceu com solidez e se tornou referência no setor de recuperação de crédito e soluções financeiras.</p>
-					<p>Com uma abordagem humana e inovadora, a Paschoalotto desenvolveu um modelo de negócio que prioriza o relacionamento com o cliente, oferecendo soluções personalizadas e canais de atendimento acessíveis. Nosso propósito é ser parte da solução para pessoas, empresas e comunidades.</p>
-					
-					<div class="history-stats">
-						<div class="stat-item">
-							<div class="stat-number">20+</div>
-							<div class="stat-label">Anos de história</div>
-						</div>
-						<div class="stat-item">
-							<div class="stat-number">15M+</div>
-							<div class="stat-label">Clientes atendidos</div>
-						</div>
-						<div class="stat-item">
-							<div class="stat-number">5</div>
-							<div class="stat-label">Unidades no Brasil</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="history-image">
-					<i class="fas fa-quote-left"></i>
-					<h3>Transformando vidas através de soluções financeiras</h3>
-					<p>"Nossa missão é oferecer serviços que realmente façam a diferença na vida das pessoas, com transparência, respeito e inovação."</p>
-					<p style="font-weight: 600; margin-top: 20px;">- Diretoria Paschoalotto</p>
-					<i class="fas fa-quote-right" style="text-align: right; display: block;"></i>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<!-- Informações de Contato -->
-	<section class="contact-info">
-		<div class="container">
-			<div class="info-grid">
-				<div class="info-block">
-					<h3><i class="fas fa-map-marker-alt"></i> Nossas Unidades</h3>
-					
-					<div class="info-detail">
-						<strong>Bauru - Matriz</strong>
-						<span>Rua Professor Durval Guedes de Azevedo, 2-144<br>Jd. Infante Dom Henrique<br>CEP: 17012-633</span>
-					</div>
-					
-					<div class="info-detail">
-						<strong>Marília</strong>
-						<span>Rua Dr. Próspero Cecílio Coimbra, 330<br>Jardim São Gabriel<br>CEP: 17525-160</span>
-					</div>
-					
-					<div class="info-detail">
-						<strong>Agudos</strong>
-						<span>Avenida João Wolber, 295<br>Santa Angelina<br>CEP: 17120-000</span>
-					</div>
-					
-					<div class="info-detail">
-						<strong>Ribeirão Preto</strong>
-						<span>Rua Antônio Fernandes Figuerôa, 1400<br>Parque Industrial Lagoinha<br>CEP: 14095-280</span>
-					</div>
-				</div>
-				
-				<div class="info-block">
-					<h3><i class="fas fa-building"></i> Dados da Empresa</h3>
-					
-					<div class="info-detail">
-						<strong>Razão Social</strong>
-						<span>Paschoalotto Serviços Financeiros Ltda</span>
-					</div>
-					
-					<div class="info-detail">
-						<strong>CNPJ</strong>
-						<span>08.939.258/0001-79</span>
-					</div>
-					
-					<div class="info-detail">
-						<strong>Telefone</strong>
-						<span><a href="https://api.whatsapp.com/send/?phone=5511961626754&text=Olá!%20Preciso%20de%20informações." target="_blank">(11) 96162-6754</a></span>
-					</div>
-					
-					<div class="info-detail">
-						<strong>Horário de Atendimento</strong>
-						<span>Segunda a Sexta, das 8h às 18h</span>
-					</div>
-				</div>
-				
-				<div class="info-block">
-					<h3><i class="fas fa-shield-alt"></i> Canais de Atendimento</h3>
-					
-					<div class="info-detail">
-						<strong><i class="fab fa-whatsapp" style="color: #5BC928;"></i> WhatsApp</strong>
-						<span><a href="https://api.whatsapp.com/send/?phone=5511961626754&text=Olá!%20Preciso%20de%20informações." target="_blank">(11) 96162-6754</a></span>
-					</div>
-					
-					<div class="info-detail">
-						<strong><i class="fas fa-headset"></i> Ouvidoria</strong>
-						<span><a href="https://api.whatsapp.com/send/?phone=5511961626754&text=Olá!%20Preciso%20falar%20com%20a%20Ouvidoria." target="_blank">Falar com Ouvidoria</a></span>
-					</div>
-					
-					<div class="info-detail">
-						<strong><i class="fas fa-lock"></i> Canais Seguros</strong>
-						<span>Nunca solicitamos token ou senha</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<!-- Footer -->
-	<footer>
-		<div class="container">
-			<div class="footer-content">
-				<div class="footer-logo">
-					<img src="https://www.paschoalotto.com.br/wp-content/themes/paschoalotto/img/institucional/logo/logo-np.webp" alt="Paschoalotto" onerror="this.src='https://via.placeholder.com/120x40/1a1a2e/ffffff?text=Paschoalotto'">
-				</div>
-				
-				<div class="social-links">
-					<a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-					<a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-					<a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-					<a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-				</div>
-			</div>
-			
-			<div class="copyright">
-				<p>© 2026 Paschoalotto Serviços Financeiros. Todos os direitos reservados.</p>
-				<p style="margin-top: 10px; font-size: 12px;">CNPJ: 08.939.258/0001-79</p>
-			</div>
-		</div>
-	</footer>
-	
-	<!-- Botão Flutuante WhatsApp -->
-	<a href="https://api.whatsapp.com/send/?phone=5511961626754&text=Olá!%20Preciso%20de%20informações%20sobre%20os%20serviços%20da%20Paschoalotto." class="whatsapp-float" target="_blank" aria-label="WhatsApp">
-		<i class="fab fa-whatsapp"></i>
-	</a>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 transition-all duration-300 border-b border-gray-100">
+      <div class="container mx-auto px-6 h-20 flex items-center justify-between max-w-7xl">
+        <a href="#" class="flex items-center gap-2 group">
+          <img src="images/logo-hapvida.png" alt="Hapvida NotreDame" class="h-12 w-auto transition-transform group-hover:scale-105">
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#solucoes" class="text-gray-600 hover:text-brand-orange font-medium text-sm transition-colors">Serviços</a>
+          <a href="#beneficios" class="text-gray-600 hover:text-brand-orange font-medium text-sm transition-colors">Benefícios</a>
+          <a href="#depoimentos" class="text-gray-600 hover:text-brand-orange font-medium text-sm transition-colors">Depoimentos</a>
+          <a href="#faq" class="text-gray-600 hover:text-brand-orange font-medium text-sm transition-colors">FAQ</a>
+        </nav>
+
+        <a href="https://wa.me/5511921447407?text=Olá!%20Gostaria%20de%20atendimento%20digital" target="_blank" class="hidden md:inline-flex items-center justify-center px-6 py-2.5 bg-brand-blue text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+          <i class="fab fa-whatsapp whatsapp-icon mr-2 text-base"></i>
+          Falar no WhatsApp
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="md:hidden text-gray-600 text-xl" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100">
+        <nav class="container mx-auto px-6 py-4 flex flex-col gap-4">
+          <a href="#solucoes" class="text-gray-600 hover:text-brand-orange font-medium text-sm transition-colors">Serviços</a>
+          <a href="#beneficios" class="text-gray-600 hover:text-brand-orange font-medium text-sm transition-colors">Benefícios</a>
+          <a href="#depoimentos" class="text-gray-600 hover:text-brand-orange font-medium text-sm transition-colors">Depoimentos</a>
+          <a href="#faq" class="text-gray-600 hover:text-brand-orange font-medium text-sm transition-colors">FAQ</a>
+          <a href="https://wa.me/5511921447407?text=Olá!%20Gostaria%20de%20atendimento%20digital" target="_blank" class="inline-flex items-center justify-center px-6 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-md">
+            <i class="fab fa-whatsapp whatsapp-icon mr-2"></i>
+            Falar no WhatsApp
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden bg-gradient-to-br from-orange-50 via-white to-blue-50">
+      <!-- Background Decor -->
+      <div class="absolute top-0 right-0 -mr-40 -mt-40 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 -ml-40 -mb-40 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl"></div>
+
+      <div class="container mx-auto px-6 max-w-7xl relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-10 lg:gap-16 items-center">
+          <!-- Content (60%) -->
+          <div class="space-y-8 animate-fade-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 border border-brand-orange/30 text-brand-orange text-xs font-bold tracking-wide uppercase shadow-sm">
+              <span class="text-base">🔥</span>
+              Atendimento Digital 24/7
+            </div>
+
+            <h1 class="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-gray-900 leading-[1.1] tracking-tight">
+              Resolva tudo pelo <br>
+              <span class="text-gradient">WhatsApp</span>
+            </h1>
+
+            <p class="text-lg text-gray-600 leading-relaxed max-w-xl">
+              Boletos, antecipação de mensalidades e negociação de débitos de forma rápida, segura e sem burocracia. Atendimento humanizado direto no seu celular.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+              <a href="https://wa.me/5511921447407?text=Olá!%20Gostaria%20de%20atendimento%20digital" target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-brand-blue text-white font-bold rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 gap-3 text-lg group">
+                <i class="fab fa-whatsapp whatsapp-icon text-2xl group-hover:scale-110 transition-transform"></i>
+                Iniciar Atendimento
+              </a>
+              
+              <a href="#solucoes" class="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-orange font-bold rounded-xl shadow-md border-2 border-brand-orange hover:bg-brand-orange hover:text-white transition-all duration-300 gap-2 text-lg">
+                Ver Serviços
+                <i class="fas fa-arrow-down text-sm"></i>
+              </a>
+            </div>
+
+            <!-- Mini Benefits -->
+            <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-gray-200">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-brand-blue">
+                  <i class="fas fa-shield-alt text-sm"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-700">Seguro</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-brand-orange">
+                  <i class="fas fa-bolt text-sm"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-700">Rápido</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-brand-blue">
+                  <i class="fas fa-mobile-alt text-sm"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-700">100% Digital</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image (40%) -->
+          <div class="relative animate-fade-up" style="animation-delay: 0.2s">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-orange/20 to-brand-blue/20 rounded-3xl blur-2xl transform rotate-3 scale-95"></div>
+
+            <figure class="relative bg-white rounded-2xl border-2 border-gray-100 shadow-2xl overflow-hidden">
+              <img src="images/hero-enfermeira.jpg" alt="Profissional de saúde Hapvida" loading="lazy" class="w-full h-auto object-cover">
+            </figure>
+
+            <!-- Floating Stats Card -->
+            <div class="absolute -bottom-6 -left-6 bg-white p-5 rounded-xl shadow-xl border border-gray-100 hidden lg:flex items-center gap-3 animate-pulse-soft">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-orange to-brand-blue flex items-center justify-center text-white">
+                <i class="fas fa-users text-xl"></i>
+              </div>
+              <div>
+                <p class="text-xs text-gray-500 font-semibold uppercase tracking-wide">Atendimentos</p>
+                <p class="text-lg font-bold text-gray-900">+5.000/mês</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Timeline -->
+    <section class="py-20 bg-white border-t border-gray-100">
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Como Funciona</h2>
+          <p class="text-gray-600 text-lg">Simples, rápido e seguro em apenas 3 passos</p>
+        </div>
+
+        <div class="relative">
+          <!-- Timeline Line -->
+          <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-brand-orange via-brand-blue to-brand-blue transform -translate-y-1/2 z-0"></div>
+
+          <div class="grid md:grid-cols-3 gap-8 relative z-10">
+            <!-- Step 1 -->
+            <div class="text-center group">
+              <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-brand-orange to-orange-600 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 relative">
+                <i class="fas fa-comment-dots text-3xl"></i>
+                <span class="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center text-brand-orange font-bold text-sm shadow-md">1</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Inicie o Chat</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Clique no botão WhatsApp e comece a conversa com nossa equipe especializada.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="text-center group">
+              <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-brand-blue to-blue-700 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 relative">
+                <i class="fas fa-clipboard-list text-3xl"></i>
+                <span class="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center text-brand-blue font-bold text-sm shadow-md">2</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Informe sua Necessidade</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Diga o que precisa: boleto, antecipação ou negociação. Forneceremos as informações necessárias.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="text-center group">
+              <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-brand-blue to-blue-700 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300 relative">
+                <i class="fas fa-check-circle text-3xl"></i>
+                <span class="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center text-brand-blue font-bold text-sm shadow-md">3</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Receba a Solução</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Pronto! Sua solicitação é processada rapidamente e você recebe o que precisa direto no WhatsApp.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="solucoes" class="py-24 bg-gray-50 relative">
+      <div class="container mx-auto px-6 max-w-7xl">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Nossos Serviços</h2>
+          <p class="text-gray-600 text-lg">
+            Escolha o serviço que você precisa e resolva tudo pelo WhatsApp
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 items-start">
+          <!-- Service 1: Boleto -->
+          <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-brand-orange group h-full flex flex-col">
+            <div class="w-16 h-16 rounded-xl bg-orange-100 text-brand-orange flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
+              <i class="fas fa-barcode"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Boleto Digital</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">
+              Emissão instantânea da segunda via do seu boleto. Mantenha seus pagamentos em dia com facilidade.
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start text-sm text-gray-700 gap-3">
+                <i class="fas fa-check-circle text-brand-orange text-base mt-0.5"></i>
+                <span>Envio imediato em PDF</span>
+              </li>
+              <li class="flex items-start text-sm text-gray-700 gap-3">
+                <i class="fas fa-check-circle text-brand-orange text-base mt-0.5"></i>
+                <span>Código de barras e Pix</span>
+              </li>
+              <li class="flex items-start text-sm text-gray-700 gap-3">
+                <i class="fas fa-check-circle text-brand-orange text-base mt-0.5"></i>
+                <span>Sem custos adicionais</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/5511921447407?text=Olá!%20Preciso%20da%202ª%20via%20do%20meu%20boleto" target="_blank" class="w-full py-3.5 px-4 rounded-lg bg-brand-orange text-white font-bold hover:bg-orange-600 hover:shadow-lg transition-all text-center text-sm flex items-center justify-center gap-2">
+              <i class="fab fa-whatsapp whatsapp-icon text-lg"></i> Solicitar Boleto
+            </a>
+          </div>
+
+          <!-- Service 2: Antecipação (Featured) -->
+          <div class="bg-white rounded-2xl p-8 shadow-2xl relative transform md:-translate-y-4 border-t-4 border-brand-blue h-full flex flex-col z-10">
+            <div class="absolute top-0 right-0 transform translate-x-2 -translate-y-1/2">
+              <span class="bg-gradient-to-r from-brand-orange to-red-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
+                <i class="fas fa-star text-[10px] mr-1"></i> Mais Procurado
+              </span>
+            </div>
+
+            <div class="w-16 h-16 rounded-xl bg-blue-100 text-brand-blue flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Antecipação de Mensalidades</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">
+              Planeje seu orçamento antecipando pagamentos. Aproveite condições exclusivas e descontos progressivos.
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start text-sm text-gray-700 gap-3">
+                <i class="fas fa-check-circle text-brand-blue text-base mt-0.5"></i>
+                <span>Descontos atrativos</span>
+              </li>
+              <li class="flex items-start text-sm text-gray-700 gap-3">
+                <i class="fas fa-check-circle text-brand-blue text-base mt-0.5"></i>
+                <span>Flexibilidade de parcelas</span>
+              </li>
+              <li class="flex items-start text-sm text-gray-700 gap-3">
+                <i class="fas fa-check-circle text-brand-blue text-base mt-0.5"></i>
+                <span>Análise personalizada</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/5511921447407?text=Olá!%20Quero%20antecipar%20mensalidades" target="_blank" class="w-full py-3.5 px-4 rounded-lg bg-brand-blue text-white font-bold hover:bg-blue-700 hover:shadow-lg transition-all text-center text-sm flex items-center justify-center gap-2">
+              <i class="fab fa-whatsapp whatsapp-icon text-lg"></i> Fazer Cotação
+            </a>
+          </div>
+
+          <!-- Service 3: Negociação -->
+          <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-brand-blue group h-full flex flex-col">
+            <div class="w-16 h-16 rounded-xl bg-blue-100 text-brand-blue flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Negociação de Débitos</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">
+              Regularize sua situação financeira com discrição. Encontramos a melhor proposta para manter seu benefício.
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start text-sm text-gray-700 gap-3">
+                <i class="fas fa-check-circle text-brand-blue text-base mt-0.5"></i>
+                <span>Parcelamento facilitado</span>
+              </li>
+              <li class="flex items-start text-sm text-gray-700 gap-3">
+                <i class="fas fa-check-circle text-brand-blue text-base mt-0.5"></i>
+                <span>Retomada imediata</span>
+              </li>
+              <li class="flex items-start text-sm text-gray-700 gap-3">
+                <i class="fas fa-check-circle text-brand-blue text-base mt-0.5"></i>
+                <span>Atendimento sigiloso</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/5511921447407?text=Olá!%20Gostaria%20de%20negociar%20débitos%20pendentes" target="_blank" class="w-full py-3.5 px-4 rounded-lg bg-brand-blue text-white font-bold hover:bg-blue-700 hover:shadow-lg transition-all text-center text-sm flex items-center justify-center gap-2">
+              <i class="fab fa-whatsapp whatsapp-icon text-lg"></i> Regularizar Agora
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="beneficios" class="py-20 bg-white border-t border-gray-100">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Por que escolher nosso <span class="text-gradient">Portal Digital?</span>
+          </h2>
+          <p class="text-gray-600">Benefícios pensados para sua comodidade</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Benefit 1 -->
+          <div class="flex gap-6 p-6 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-orange-600 rounded-xl flex items-center justify-center shadow-md">
+                <i class="fas fa-user-friends text-white text-2xl"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Atendimento Humanizado</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Equipe treinada e empática pronta para entender suas necessidades e oferecer as melhores soluções.
+              </p>
+            </div>
+          </div>
+
+          <!-- Benefit 2 -->
+          <div class="flex gap-6 p-6 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-gradient-to-br from-brand-blue to-blue-700 rounded-xl flex items-center justify-center shadow-md">
+                <i class="fas fa-clock text-white text-2xl"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Sem Filas ou Espera</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Resolva tudo pelo celular, sem sair de casa. Economia de tempo e máxima conveniência.
+              </p>
+            </div>
+          </div>
+
+          <!-- Benefit 3 -->
+          <div class="flex gap-6 p-6 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-gradient-to-br from-brand-blue to-blue-700 rounded-xl flex items-center justify-center shadow-md">
+                <i class="fas fa-shield-alt text-white text-2xl"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Dados Protegidos (LGPD)</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Suas informações são tratadas com segurança máxima e em conformidade com a legislação brasileira.
+              </p>
+            </div>
+          </div>
+
+          <!-- Benefit 4 -->
+          <div class="flex gap-6 p-6 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100">
+            <div class="flex-shrink-0">
+              <div class="w-16 h-16 bg-gradient-to-br from-brand-orange to-orange-600 rounded-xl flex items-center justify-center shadow-md">
+                <i class="fas fa-mobile-alt text-white text-2xl"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Disponível 24/7</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Inicie sua solicitação a qualquer hora. Nossa equipe responde prontamente no horário comercial.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="depoimentos" class="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+          O que dizem nossos <span class="text-brand-blue">Beneficiários</span>
+        </h2>
+        <p class="text-center text-gray-600 mb-16">Avaliações reais de quem já utilizou nossos serviços</p>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300">
+            <div class="flex items-center gap-1 text-yellow-400 mb-4 text-base">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-700 text-sm leading-relaxed mb-6 italic">
+              "Consegui antecipar 12 meses com um desconto incrível! O atendimento foi super rápido e profissional. Recomendo!"
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-orange to-orange-600 flex items-center justify-center text-white font-bold">
+                MC
+              </div>
+              <div>
+                <p class="font-bold text-gray-900">Marina Costa</p>
+                <p class="text-xs text-gray-500">São Paulo, SP</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300">
+            <div class="flex items-center gap-1 text-yellow-400 mb-4 text-base">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-700 text-sm leading-relaxed mb-6 italic">
+              "Precisei negociar débitos e fui muito bem atendido. Consegui parcelar de forma que coube no meu orçamento. Muito obrigado!"
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-blue to-blue-700 flex items-center justify-center text-white font-bold">
+                RS
+              </div>
+              <div>
+                <p class="font-bold text-gray-900">Roberto Silva</p>
+                <p class="text-xs text-gray-500">Rio de Janeiro, RJ</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300">
+            <div class="flex items-center gap-1 text-yellow-400 mb-4 text-base">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-700 text-sm leading-relaxed mb-6 italic">
+              "Emissão de boleto em menos de 2 minutos! Praticidade que faz toda a diferença. Serviço excelente!"
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-orange to-orange-600 flex items-center justify-center text-white font-bold">
+                AP
+              </div>
+              <div>
+                <p class="font-bold text-gray-900">Ana Paula</p>
+                <p class="text-xs text-gray-500">Belo Horizonte, MG</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-white border-t border-gray-100">
+      <div class="container mx-auto px-6 max-w-4xl">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Perguntas Frequentes</h2>
+        <p class="text-center text-gray-600 mb-12">Tire suas dúvidas sobre nossos serviços</p>
+
+        <div class="space-y-4">
+          <!-- FAQ 1 -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-brand-orange transition-colors">
+            <button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-white transition-colors">
+              <span class="flex items-center gap-3 text-lg font-bold text-gray-900">
+                <i class="fas fa-question-circle text-brand-orange"></i>
+                Como solicito a segunda via do boleto?
+              </span>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+            </button>
+            <div class="faq-answer hidden px-6 pb-6">
+              <p class="text-gray-600 leading-relaxed pl-8">
+                É muito simples! Clique em qualquer botão "Falar no WhatsApp" ou no card de "Boleto Digital". Nossa equipe pedirá alguns dados de identificação e em poucos minutos você receberá o boleto em PDF diretamente no chat.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-brand-blue transition-colors">
+            <button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-white transition-colors">
+              <span class="flex items-center gap-3 text-lg font-bold text-gray-900">
+                <i class="fas fa-question-circle text-brand-blue"></i>
+                Há limite de parcelas para antecipação?
+              </span>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+            </button>
+            <div class="faq-answer hidden px-6 pb-6">
+              <p class="text-gray-600 leading-relaxed pl-8">
+                Não há limites fixos. Você pode antecipar quantas mensalidades desejar. Quanto mais você antecipar, melhores serão os descontos oferecidos. Nossa equipe fará uma análise personalizada para oferecer as melhores condições.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-brand-orange transition-colors">
+            <button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-white transition-colors">
+              <span class="flex items-center gap-3 text-lg font-bold text-gray-900">
+                <i class="fas fa-question-circle text-brand-orange"></i>
+                Quais as condições para negociação de débitos?
+              </span>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+            </button>
+            <div class="faq-answer hidden px-6 pb-6">
+              <p class="text-gray-600 leading-relaxed pl-8">
+                Trabalhamos com flexibilidade! Desenvolvemos planos personalizados para regularização de débitos, sempre visando manter seu benefício ativo. As parcelas são ajustadas de acordo com sua capacidade de pagamento.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-brand-blue transition-colors">
+            <button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-white transition-colors">
+              <span class="flex items-center gap-3 text-lg font-bold text-gray-900">
+                <i class="fas fa-question-circle text-brand-blue"></i>
+                Qual o horário de atendimento?
+              </span>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+            </button>
+            <div class="faq-answer hidden px-6 pb-6">
+              <p class="text-gray-600 leading-relaxed pl-8">
+                Você pode iniciar sua solicitação pelo WhatsApp a qualquer hora, 24/7. Nossa equipe especializada responde prontamente durante o horário comercial (segunda a sexta, das 8h às 18h).
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-brand-orange transition-colors">
+            <button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-white transition-colors">
+              <span class="flex items-center gap-3 text-lg font-bold text-gray-900">
+                <i class="fas fa-question-circle text-brand-orange"></i>
+                Meus dados estão seguros?
+              </span>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+            </button>
+            <div class="faq-answer hidden px-6 pb-6">
+              <p class="text-gray-600 leading-relaxed pl-8">
+                Absolutamente! Todas as suas informações são tratadas com máxima segurança e em total conformidade com a LGPD (Lei Geral de Proteção de Dados). Utilizamos criptografia e protocolos de segurança rigorosos.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-brand-blue transition-colors">
+            <button class="faq-question w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-white transition-colors">
+              <span class="flex items-center gap-3 text-lg font-bold text-gray-900">
+                <i class="fas fa-question-circle text-brand-blue"></i>
+                Há algum custo adicional pelos serviços?
+              </span>
+              <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+            </button>
+            <div class="faq-answer hidden px-6 pb-6">
+              <p class="text-gray-600 leading-relaxed pl-8">
+                Não! A emissão de boletos e o atendimento pelo WhatsApp são totalmente gratuitos. Para antecipação e negociação, as condições financeiras são apresentadas de forma transparente antes de você confirmar qualquer procedimento.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 bg-gradient-to-br from-brand-orange via-orange-500 to-red-500 relative overflow-hidden">
+      <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+      <div class="container mx-auto px-6 max-w-4xl text-center relative z-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Pronto para resolver suas pendências?</h2>
+        <p class="text-white/90 text-lg mb-10 max-w-2xl mx-auto">
+          Fale agora com nossa equipe especializada e experimente um atendimento rápido, seguro e humanizado.
+        </p>
+        <a href="https://wa.me/5511921447407?text=Olá!%20Gostaria%20de%20falar%20com%20um%20atendente" target="_blank" class="inline-flex items-center justify-center px-10 py-5 bg-white text-brand-orange font-bold rounded-xl shadow-2xl hover:bg-gray-50 hover:scale-105 transition-all duration-300 gap-3 text-xl group">
+          <i class="fab fa-whatsapp whatsapp-icon text-3xl group-hover:scale-110 transition-transform"></i>
+          Falar com Especialista
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+      <div class="container mx-auto px-6 max-w-7xl">
+        <div class="grid md:grid-cols-4 gap-8 mb-12">
+          <div class="md:col-span-2">
+            <img src="images/logo-hapvida.png" alt="Logo Hapvida" class="h-10 mb-6 brightness-0 invert opacity-80">
+            <p class="text-sm leading-relaxed max-w-sm mb-6">
+              Portal oficial de serviços financeiros para beneficiários Hapvida NotreDame. Soluções digitais com segurança e rapidez.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-orange hover:text-white transition-colors">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-orange hover:text-white transition-colors">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-orange hover:text-white transition-colors">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-6">Acesso Rápido</h4>
+            <ul class="space-y-3 text-sm">
+              <li><a href="#solucoes" class="hover:text-brand-orange transition-colors">Boleto Digital</a></li>
+              <li><a href="#solucoes" class="hover:text-brand-orange transition-colors">Antecipação</a></li>
+              <li><a href="#solucoes" class="hover:text-brand-orange transition-colors">Negociação</a></li>
+              <li><a href="#faq" class="hover:text-brand-orange transition-colors">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-6">Contato</h4>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-2">
+                <i class="fas fa-phone text-brand-orange mt-1"></i>
+                <span>0800 015 3855 (SAC)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fab fa-whatsapp text-brand-orange mt-1"></i>
+                <span>(11) 92144-7407</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fas fa-map-marker-alt text-brand-orange mt-1"></i>
+                <span>Av. Paulista, 867<br>São Paulo/SP - 01311-100</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-gray-800 space-y-4 text-xs text-center md:text-left">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>© 2025 Hapvida NotreDame. Todos os direitos reservados.</p>
+            <p>CNPJ: 44.649.812/0001-38</p>
+          </div>
+          <div class="text-gray-500">
+            <p>Diretor Médico Hapvida NotreDame: Dr. Rodolfo Pires de Albuquerque - CRM: 40.137</p>
+            <p>Responsável Técnico Hapvida + Odonto: Dr. Ronaldo Shigueo Kazihara - CRO/SP 70711</p>
+          </div>
+          <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+            <button onclick="openModal('privacyModal')" class="hover:text-brand-orange transition-colors">
+              Política de Privacidade
+            </button>
+            <span class="text-gray-700">|</span>
+            <button onclick="openModal('termsModal')" class="hover:text-brand-orange transition-colors">
+              Termos de Serviço
+            </button>
+            <span class="text-gray-700">|</span>
+            <button onclick="openModal('lgpdModal')" class="hover:text-brand-orange transition-colors">
+              LGPD
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5511921447407?text=Olá!%20Preciso%20de%20ajuda" target="_blank" aria-label="Fale conosco no WhatsApp" class="fixed bottom-6 right-6 z-50 w-16 h-16 bg-brand-blue text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 animate-pulse-soft hover:shadow-blue-500/50">
+      <i class="fab fa-whatsapp whatsapp-icon text-3xl"></i>
+    </a>
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-40 transform translate-y-full transition-transform duration-500 p-6">
+      <div class="container mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex-1">
+          <h3 class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+            <i class="fas fa-cookie-bite text-brand-orange"></i>
+            Utilizamos Cookies
+          </h3>
+          <p class="text-sm text-gray-600">
+            Para melhorar sua experiência e garantir a segurança dos seus dados conforme a LGPD. Ao continuar navegando, você concorda com nossa política de cookies.
+          </p>
+        </div>
+        <div class="flex gap-4">
+          <button onclick="rejectCookies()" class="px-6 py-2.5 text-gray-600 font-semibold hover:bg-gray-100 rounded-lg transition-colors text-sm">
+            Recusar
+          </button>
+          <button onclick="acceptCookies()" class="px-6 py-2.5 bg-brand-orange text-white font-bold rounded-lg hover:bg-orange-600 transition-colors shadow-md text-sm">
+            Aceitar Cookies
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity" onclick="closeModal('privacyModal')"></div>
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4">
+          <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all w-full max-w-2xl">
+            <div class="bg-white px-6 py-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-bold text-gray-900">Política de Privacidade</h3>
+                <button onclick="closeModal('privacyModal')" class="text-gray-400 hover:text-gray-600">
+                  <i class="fas fa-times text-xl"></i>
+                </button>
+              </div>
+              <div class="mt-4 space-y-4 text-sm text-gray-600 max-h-96 overflow-y-auto pr-2">
+                <p><strong>1. Coleta de Informações:</strong> Coletamos apenas os dados necessários para prestação dos serviços solicitados.</p>
+                <p><strong>2. Uso dos Dados:</strong> Informações utilizadas exclusivamente para identificação e processamento de solicitações.</p>
+                <p><strong>3. Compartilhamento:</strong> Não compartilhamos dados com terceiros não autorizados.</p>
+                <p><strong>4. Segurança:</strong> Empregamos criptografia e protocolos avançados de segurança.</p>
+                <p><strong>5. Seus Direitos:</strong> Você pode solicitar acesso, correção ou exclusão de seus dados a qualquer momento.</p>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 flex justify-end">
+              <button onclick="closeModal('privacyModal')" class="px-6 py-2.5 bg-brand-blue text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                Entendi
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div id="termsModal" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity" onclick="closeModal('termsModal')"></div>
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4">
+          <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all w-full max-w-2xl">
+            <div class="bg-white px-6 py-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-bold text-gray-900">Termos de Serviço</h3>
+                <button onclick="closeModal('termsModal')" class="text-gray-400 hover:text-gray-600">
+                  <i class="fas fa-times text-xl"></i>
+                </button>
+              </div>
+              <div class="mt-4 space-y-4 text-sm text-gray-600 max-h-96 overflow-y-auto pr-2">
+                <p><strong>1. Aceitação:</strong> Ao utilizar este portal, você concorda com estes Termos de Serviço.</p>
+                <p><strong>2. Serviços:</strong> Oferecemos emissão de boletos, antecipação de mensalidades e negociação de débitos.</p>
+                <p><strong>3. Responsabilidade:</strong> O usuário é responsável pela veracidade dos dados fornecidos.</p>
+                <p><strong>4. Disponibilidade:</strong> Mantemos o serviço disponível 24/7, mas manutenções podem ocorrer.</p>
+                <p><strong>5. Alterações:</strong> Podemos alterar estes termos mediante aviso prévio no portal.</p>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 flex justify-end">
+              <button onclick="closeModal('termsModal')" class="px-6 py-2.5 bg-brand-blue text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                Entendi
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LGPD Modal -->
+    <div id="lgpdModal" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity" onclick="closeModal('lgpdModal')"></div>
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4">
+          <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all w-full max-w-2xl">
+            <div class="bg-white px-6 py-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-bold text-gray-900">Proteção de Dados (LGPD)</h3>
+                <button onclick="closeModal('lgpdModal')" class="text-gray-400 hover:text-gray-600">
+                  <i class="fas fa-times text-xl"></i>
+                </button>
+              </div>
+              <div class="mt-4 space-y-4 text-sm text-gray-600 max-h-96 overflow-y-auto pr-2">
+                <p><strong>Conformidade:</strong> Operamos em total conformidade com a LGPD (Lei nº 13.709/2018).</p>
+                <p><strong>Encarregado (DPO):</strong> Dispomos de encarregado responsável pela proteção de dados.</p>
+                <p><strong>Base Legal:</strong> Tratamento baseado em execução de contrato e legítimo interesse.</p>
+                <p><strong>Direitos:</strong> Você pode exercer direitos de acesso, correção, eliminação e portabilidade de dados.</p>
+                <p><strong>Retenção:</strong> Dados mantidos apenas pelo tempo necessário, respeitando prazos legais.</p>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 flex justify-end">
+              <button onclick="closeModal('lgpdModal')" class="px-6 py-2.5 bg-brand-blue text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                Entendi
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // FAQ Accordion
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          const icon = question.querySelector('.fa-chevron-down');
+          
+          // Close all other answers
+          document.querySelectorAll('.faq-answer').forEach(item => {
+            if (item !== answer) {
+              item.classList.add('hidden');
+              item.previousElementSibling.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+            }
+          });
+          
+          // Toggle current answer
+          answer.classList.toggle('hidden');
+          icon.style.transform = answer.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+      });
+
+      // Modal Logic
+      function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+
+      // Close on ESC
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          ['privacyModal', 'termsModal', 'lgpdModal'].forEach(closeModal);
+        }
+      });
+
+      // Cookie Banner Logic
+      function showCookieBanner() {
+        const banner = document.getElementById('cookieBanner');
+        if (!localStorage.getItem('cookiesAccepted')) {
+          setTimeout(() => {
+            banner.classList.remove('translate-y-full');
+          }, 1500);
+        }
+      }
+
+      function acceptCookies() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        const banner = document.getElementById('cookieBanner');
+        banner.classList.add('translate-y-full');
+      }
+
+      function rejectCookies() {
+        const banner = document.getElementById('cookieBanner');
+        banner.classList.add('translate-y-full');
+      }
+
+      // Header Shadow on Scroll
+      const header = document.querySelector('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+          header.classList.add('shadow-md');
+        } else {
+          header.classList.remove('shadow-md');
+        }
+      });
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+        showCookieBanner();
+      });
+    </script>
 </body>
 </html>
